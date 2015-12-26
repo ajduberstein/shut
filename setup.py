@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
-import sys
-
 
 try:
     from setuptools import setup
@@ -16,21 +13,6 @@ with open('README.rst') as readme_file:
 
 with open('HISTORY.rst') as history_file:
     history = history_file.read().replace('.. :changelog:', '')
-
-if sys.argv[-1] == 'test':
-    test_requirements = [
-        'pytest',
-        'flake8',
-        'coverage'
-    ]
-    try:
-        modules = map(__import__, test_requirements)
-    except ImportError as e:
-        err_msg = e.message.replace("No module named ", "")
-        msg = "%s is not installed. Install your test requirments." % err_msg
-        raise ImportError(msg)
-    os.system('py.test')
-    sys.exit()
 
 setup(
     name='shut',

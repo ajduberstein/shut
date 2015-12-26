@@ -6,7 +6,7 @@ import re
 import sys
 
 
-now, year_delta = datetime.now(), timedelta(days=365)
+now, year_delta = datetime.utcnow(), timedelta(days=365)
 DEFAULT_MIN_DATE = (now - year_delta).strftime('%Y-%m-%d')
 DEFAULT_MAX_DATE = (now + year_delta).strftime('%Y-%m-%d')
 

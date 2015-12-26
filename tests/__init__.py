@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-from test_shut import TestShut  # noqa
+# from tests.test_shut import TestShut  # noqa

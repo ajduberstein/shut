@@ -10,6 +10,9 @@ Tests for `shut` module.
 
 import sys
 import unittest
+import StringIO
+
+from mock import patch
 
 from shut import shape_unix_time
 
@@ -19,11 +22,17 @@ class TestShut(unittest.TestCase):
     def setUp(self):
         pass
 
-    def test_shape_unix_time(self):
-        raw_input = lambda _: ''  # noqa
-        shape_unix_time('2015-01-01', '2015-10-01')
-        output = sys.stdout.getvalue().strip()
-        assert output == ''
+    def test_shape_unix_time_unchanged_input(self):
+        with patch('sys.stdout', new=StringIO.StringIO()) as fakeOutput:
+            sys.stdin = StringIO.StringIO('asdlkj')
+            shape_unix_time('2015-01-01', '2015-10-01')
+            assert fakeOutput.getvalue().strip() == 'asdlkj'
+
+    def test_shape_unix_time_converted(self):
+        with patch('sys.stdout', new=StringIO.StringIO()) as fakeOutput:
+            sys.stdin = StringIO.StringIO('asdlkj,1443304641,more_text,1443304642')
+            shape_unix_time('2015-01-01', '2015-10-01')
+            assert fakeOutput.getvalue().strip() == 'asdlkj,2015-09-26 21:57:21,more_text,2015-09-26 21:57:22'
 
     def tearDown(self):
         pass
