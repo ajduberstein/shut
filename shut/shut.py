@@ -1,27 +1,24 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
-import sys
+from datetime import datetime, timedelta
+from optparse import OptionParser
 import re
-from datetime import datetime
-import click
+import sys
 
 
-@click.command()
-@click.option('--min-date',
-              default='2015-01-01',
-              help='Lower bound for Unix time candidates.'
-              )
-@click.option('--max-date',
-              default='2999-01-01',
-              help='Upper bound for Unix time candidates.'
-              )
+now, year_delta = datetime.now(), timedelta(days=365)
+DEFAULT_MIN_DATE = (now - year_delta).strftime('%Y-%m-%d')
+DEFAULT_MAX_DATE = (now + year_delta).strftime('%Y-%m-%d')
+
+
 def shape_unix_time(min_date, max_date):
-    min_ut, max_date = handle_defaults(min_date, max_date)
+    min_ut, max_date = _handle_inputs(min_date, max_date)
     lines = sys.stdin.read().split('\n')
     for line in lines:
         print _make_readable_ut(line, min_ut, max_date)
 
 
-def handle_defaults(min_date='2015-01-01', max_date=None):
+def _handle_inputs(min_date='2015-01-01', max_date=None):
     # Make unix time
     min_ut = min_date
     if type(min_date) != int:
@@ -41,5 +38,23 @@ def _make_readable_ut(input_str, lo, hi):
     return input_str
 
 
+def main():
+    parser = OptionParser()
+    parser.add_option('-m', '--min-date',
+                      dest='min_date',
+                      default=DEFAULT_MIN_DATE,
+                      help='Lower bound for Unix time candidates, YYYY-MM-DD format',
+                      metavar='YYYY-MM-DD')
+
+    parser.add_option('-M', '--max-date',
+                      dest='max_date',
+                      default=DEFAULT_MAX_DATE,
+                      help='Upper bound for Unix time candidates, YYYY-MM-DD format',
+                      metavar='YYYY-MM-DD')
+
+    (options, args) = parser.parse_args()
+    shape_unix_time(options.min_date, options.max_date)
+
+
 if __name__ == '__main__':
-    shape_unix_time()
+    main()

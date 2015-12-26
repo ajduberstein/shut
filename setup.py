@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
+import sys
+
 
 try:
     from setuptools import setup
@@ -14,29 +17,35 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read().replace('.. :changelog:', '')
 
-requirements = [
-    # TODO: put package requirements here
-]
-
-test_requirements = [
-    # TODO: put package test requirements here
-]
+if sys.argv[-1] == 'test':
+    test_requirements = [
+        'pytest',
+        'flake8',
+        'coverage'
+    ]
+    try:
+        modules = map(__import__, test_requirements)
+    except ImportError as e:
+        err_msg = e.message.replace("No module named ", "")
+        msg = "%s is not installed. Install your test requirments." % err_msg
+        raise ImportError(msg)
+    os.system('py.test')
+    sys.exit()
 
 setup(
     name='shut',
     version='0.1.0',
-    description="shut (SHape Unix Time) is a tool for converting Unix time to something readable with minimal effort."",
+    description="shut (SHape Unix Time) is a tool for converting Unix time to something readable with minimal effort.",
     long_description=readme + '\n\n' + history,
     author="Andrew Duberstein",
     author_email='ajduberstein@gmail.com',
     url='https://github.com/ajduberstein/shut',
     packages=[
         'shut',
+        'tests'
     ],
-    package_dir={'shut':
-                 'shut'},
+    package_dir={'shut': 'shut'},
     include_package_data=True,
-    install_requires=requirements,
     license="BSD",
     zip_safe=False,
     keywords='shut',
@@ -53,5 +62,4 @@ setup(
         'Programming Language :: Python :: 3.4',
     ],
     test_suite='tests',
-    tests_require=test_requirements
 )
