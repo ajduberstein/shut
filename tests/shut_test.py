@@ -41,5 +41,10 @@ class TestShut(unittest.TestCase):
             self.utp.shape_unix_time()
             assert fakeOutput.getvalue().strip() == 'asdlkj,2015-09-26 21:57:21,more_text,2015-09-26 21:57:22'
 
+    def test_command_line_execution(self):
+        # TODO test command line execution
+        # Popen('cat ./README.md | ./shut/shut.py')
+        pass
+
 if __name__ == '__main__':
     TestShut()
