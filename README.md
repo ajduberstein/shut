@@ -12,9 +12,8 @@ echo '{"ts": 1440999387, "level": "ERROR", "msg": "A mistake at some time"}' | s
 # {"ts": "2015-08-31 05:36:27", "level": "ERROR", "msg": "A mistake at some time"}
 ```
 
-Since Unix time could in theory be between 0 and infinity, you can provide a reasonable range
-for timestamps. The default is to parse a string for numbers greater than 2015-01-01 00:00:00 UTC
-(in epoch time, 1420070400) and return that value.
+Since Unix time could in theory be between negative and positive infinity, you may choose to provide a reasonable range
+for timestamps. The default is to parse a string for numbers greater than a year ago and less than a year from today.
 
 ```
 echo '{"ts": 584928000, "level": "INFO", "msg": "Die Hard release date"}' | shut --min-date 1988-01-01
