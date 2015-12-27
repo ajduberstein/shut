@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from tests import shut_test  # noqa
+
 
 try:
     from setuptools import setup
@@ -44,4 +46,6 @@ setup(
         'Programming Language :: Python :: 3.4',
     ],
     test_suite='tests',
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest', 'mock']
 )
