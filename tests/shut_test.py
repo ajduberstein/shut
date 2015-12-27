@@ -31,7 +31,7 @@ class TestShut(unittest.TestCase):
     def test_shape_unix_time_converted(self):
         with patch('sys.stdout', new=StringIO.StringIO()) as fakeOutput:
             sys.stdin = StringIO.StringIO('asdlkj,1443304641,more_text,1443304642')
-            shape_unix_time('2015-01-01', '2015-10-01')
+            shape_unix_time('2015-01-01', '2015-10-01', 'US/Pacific')
             assert fakeOutput.getvalue().strip() == 'asdlkj,2015-09-26 21:57:21,more_text,2015-09-26 21:57:22'
 
     def tearDown(self):
