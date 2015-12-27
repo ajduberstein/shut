@@ -45,5 +45,7 @@ docs/_build
 # Vim
 *.*.swp
 
-.cache/*
+*.cache/*
+*.eggs/*
+*.editorconfig
 env/*
