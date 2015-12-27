@@ -13,7 +13,7 @@ DEFAULT_MIN_DATE = (now - year_delta).strftime(DATE_FORMAT)
 DEFAULT_MAX_DATE = (now + year_delta).strftime(DATE_FORMAT)
 
 
-class TimeConverter:
+class UnixTimeParser:
 
     def __init__(self, min_date, max_date, input_tz):
         self.input_tz = input_tz
@@ -76,7 +76,7 @@ def main():
                       metavar='TIMEZONE')
 
     (options, args) = parser.parse_args()
-    t = TimeConverter(options.min_date, options.max_date, options.input_tz)
+    t = UnixTimeParser(options.min_date, options.max_date, options.input_tz)
     t.shape_unix_time()
 
 
