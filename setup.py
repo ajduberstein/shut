@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from tests import shut_test  # noqa
-
-
 try:
     from setuptools import setup
 except ImportError:
@@ -26,9 +23,10 @@ setup(
     url='https://github.com/ajduberstein/shut',
     packages=[
         'shut',
-        'tests'
     ],
-    package_dir={'shut': 'shut'},
+    entry_points = {
+        'console_scripts': ['shut=shut.shut:main'],
+    },
     include_package_data=True,
     license='BSD',
     zip_safe=False,
