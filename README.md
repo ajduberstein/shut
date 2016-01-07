@@ -1,12 +1,14 @@
 shut
 =========
-shut is short for "SHape Unix Time" and uses regular expressions to take data piped to it
-and tranform things that look like Unix time into human-readable timestamps.
+shut is short for "SHape Unix Time." It uses regular expressions to take piped data
+and convert substrings that look like Unix time into human-readable timestamps.
 
-This is for those of us who have logs that have an error in them with a Unix time stamp, and we simply want to see when the error occurred with as little work as possible.
+This is for those of us who have Unix time logs and want to see when events occurred as lazily as possible.
 
 ## Installation
 
+`git clone https://github.com/ajduberstein/shut.git`
+`cd shut`
 `python setup.py install`
 
 ## Usage
