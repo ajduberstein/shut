@@ -7,9 +7,11 @@ This is for those of us who have Unix time logs and want to see when events occu
 
 ## Installation
 
-`git clone https://github.com/ajduberstein/shut.git`
-`cd shut`
-`python setup.py install`
+```
+git clone https://github.com/ajduberstein/shut.git
+cd shut
+python setup.py install
+```
 
 ## Usage
 
